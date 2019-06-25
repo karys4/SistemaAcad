@@ -19,9 +19,10 @@ namespace SistemaAcad.Models
 
         public string Descripcion { get; set; }
 
-        public string Carrera { get; set; }
         [Required(ErrorMessage = "Obligatorio")]
-        [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+        [StringLength(30, ErrorMessage = "Máximo 30 letras")]
+        public string Carrera { get; set; }
+        
 
         public Boolean Estado { get; set; }
 

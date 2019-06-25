@@ -19,11 +19,49 @@ namespace SistemaAcad.Controllers
         }
 
         // GET: Categorias
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             return View(await _context.Categoria.ToListAsync());
-        }
+        }*/
 
+
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewData["NombreSortParm"] = sortOrder == "Nombre" ? "nombre_desc" : "Nombre";
+            ViewData["CarreraSortParm"] = sortOrder == "Carrera" ? "carrera_desc" : "Carrera";
+            ViewData["CurrentSort"] = sortOrder;
+
+            var categorias = from s in _context.Categoria select s;
+
+           /* if (!String.IsNullOrEmpty(searchString))
+            {
+                categorias = categorias.Where(s => s.Nombre.Contains(searchString) || s.Descripcion.Contains(searchString));
+            }*/
+
+           
+
+            switch (sortOrder)
+            {
+                case "Nombre":
+                    categorias = categorias.OrderBy(s => s.Nombre);
+                    break;
+                case "nombre_desc":
+                    categorias = categorias.OrderByDescending(s => s.Nombre);
+                    break;
+                case "Carrera":
+                    categorias = categorias.OrderBy(s => s.Carrera);
+                    break;
+                case "carrera_desc":
+                    categorias = categorias.OrderByDescending(s => s.Carrera);
+                    break;
+
+            }
+
+            return View(await _context.Categoria.ToListAsync());
+
+
+
+        }
         // GET: Categorias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -148,5 +186,7 @@ namespace SistemaAcad.Controllers
         {
             return _context.Categoria.Any(e => e.CategoriaID == id);
         }
+
+        
     }
 }
