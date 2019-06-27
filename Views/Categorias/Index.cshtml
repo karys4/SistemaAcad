@@ -18,6 +18,8 @@
             Filtro: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Buscar" class="btn btn-default" />
             <a asp-action="Index"> Todos los registros</a>
+
+
         </p>
     </div>
 </form>
@@ -43,7 +45,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Estado)
             </th>
-            <th></th>
+            <!-- <th></th>-->
         </tr>
     </thead>
     <tbody>
@@ -63,7 +65,7 @@
                     @Html.DisplayFor(modelItem => item.Estado)
                 </td>
                 <td>
-                   
+
                     <a asp-action="Edit" asp-route-id="@item.CategoriaID">Editar</a> |
                     <a asp-action="Details" asp-route-id="@item.CategoriaID">Detalles</a> |
                     <a asp-action="Delete" asp-route-id="@item.CategoriaID">Eliminar</a>
@@ -72,3 +74,9 @@
         }
     </tbody>
 </table>
+
+<!--Botón anterior-->
+
+
+
+

@@ -19,49 +19,69 @@ namespace SistemaAcad.Controllers
         }
 
         // GET: Categorias
-        /*public async Task<IActionResult> Index()
-        {
-            return View(await _context.Categoria.ToListAsync());
-        }*/
-
 
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            ViewData["NombreSortParm"] = sortOrder == "Nombre" ? "nombre_desc" : "Nombre";
-            ViewData["CarreraSortParm"] = sortOrder == "Carrera" ? "carrera_desc" : "Carrera";
+            ViewData["NombreSortParm"] = String.IsNullOrEmpty(sortOrder) ? "nombre_desc" : "";
+            ViewData["CarreraSortParm"] = sortOrder == "carrera_asc" ? "carrera_desc" : "carrera_asc";
+            ViewData["DescripcionSortParm"] = sortOrder == "descripcion_asc" ? "descripcion_desc" : "descripcion_asc";
             ViewData["CurrentSort"] = sortOrder;
+
+            ViewData["searchString"] = searchString;
+
+
+            
+
+            /* if (!String.IsNullOrEmpty(searchString))
+              {
+                  categorias = categorias.Where(s => s.Nombre.Contains(searchString) || s.Descripcion.Contains(searchString));
+              }*/
+
+           /* if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentSort"] = sortOrder;*/
+
+
+
 
             var categorias = from s in _context.Categoria select s;
 
-           /* if (!String.IsNullOrEmpty(searchString))
-            {
-                categorias = categorias.Where(s => s.Nombre.Contains(searchString) || s.Descripcion.Contains(searchString));
-            }*/
-
-           
-
             switch (sortOrder)
             {
-                case "Nombre":
+                /*case "Nombre":
                     categorias = categorias.OrderBy(s => s.Nombre);
-                    break;
+                    break;*/
                 case "nombre_desc":
                     categorias = categorias.OrderByDescending(s => s.Nombre);
-                    break;
-                case "Carrera":
-                    categorias = categorias.OrderBy(s => s.Carrera);
                     break;
                 case "carrera_desc":
                     categorias = categorias.OrderByDescending(s => s.Carrera);
                     break;
+                case "carrera_asc":
+                    categorias = categorias.OrderBy(s => s.Carrera);
+                    break;
+
+                default:
+                    categorias = categorias.OrderBy(s => s.Nombre);
+                    break;
 
             }
 
-            return View(await _context.Categoria.ToListAsync());
-
-
-
+            return View(await categorias.AsNoTracking().ToListAsync());
+            //int pageSize = 3;
+            //return View(await Paginacion<Categoria>.CreateAsync(categorias.AsNoTracking(), page ?? 1, pageSize));
         }
+    
+
+
+        
         // GET: Categorias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
