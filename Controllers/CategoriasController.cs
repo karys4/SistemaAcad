@@ -26,8 +26,35 @@ namespace SistemaAcad.Controllers
             ViewData["CarreraSortParm"] = sortOrder == "carrera_asc" ? "carrera_desc" : "carrera_asc";
             ViewData["DescripcionSortParm"] = sortOrder == "descripcion_asc" ? "descripcion_desc" : "descripcion_asc";
             ViewData["CurrentSort"] = sortOrder;
-
             ViewData["searchString"] = searchString;
+
+
+            //Página de registros
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentSort"] = sortOrder;
+
+
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentSort"] = sortOrder;
+
 
 
             var categorias = from s in _context.Categoria select s;
@@ -45,8 +72,7 @@ namespace SistemaAcad.Controllers
             {
                 searchString = currentFilter;
             }
-            ViewData["CurrentFilter"] = searchString;
-            ViewData["CurrentSort"] = sortOrder;
+            
 
 
 
@@ -55,9 +81,6 @@ namespace SistemaAcad.Controllers
 
             switch (sortOrder)
             {
-                /*case "Nombre":
-                    categorias = categorias.OrderBy(s => s.Nombre);
-                    break;*/
                 case "nombre_desc":
                     categorias = categorias.OrderByDescending(s => s.Nombre);
                     break;
@@ -75,8 +98,8 @@ namespace SistemaAcad.Controllers
             }
 
             return View(await categorias.AsNoTracking().ToListAsync());
-            //int pageSize = 3;
-            //return View(await Paginacion<Categoria>.CreateAsync(categorias.AsNoTracking(), page ?? 1, pageSize));
+            int pageSize = 3;
+            return View(await Paginacion<Categoria>.CreateAsync(categorias.AsNoTracking(), page ?? 1, pageSize));
         }
     
 
