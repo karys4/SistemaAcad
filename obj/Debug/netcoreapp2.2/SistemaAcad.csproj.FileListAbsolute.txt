@@ -5,7 +5,6 @@ C:\Users\Kary\source\repos\SistemaAcad\bin\Debug\netcoreapp2.2\SistemaAcad.dll
 C:\Users\Kary\source\repos\SistemaAcad\bin\Debug\netcoreapp2.2\SistemaAcad.pdb
 C:\Users\Kary\source\repos\SistemaAcad\bin\Debug\netcoreapp2.2\SistemaAcad.Views.dll
 C:\Users\Kary\source\repos\SistemaAcad\bin\Debug\netcoreapp2.2\SistemaAcad.Views.pdb
-C:\Users\Kary\source\repos\SistemaAcad\obj\Debug\netcoreapp2.2\SistemaAcad.csprojAssemblyReference.cache
 C:\Users\Kary\source\repos\SistemaAcad\obj\Debug\netcoreapp2.2\SistemaAcad.csproj.CoreCompileInputs.cache
 C:\Users\Kary\source\repos\SistemaAcad\obj\Debug\netcoreapp2.2\SistemaAcad.RazorAssemblyInfo.cache
 C:\Users\Kary\source\repos\SistemaAcad\obj\Debug\netcoreapp2.2\SistemaAcad.RazorAssemblyInfo.cs

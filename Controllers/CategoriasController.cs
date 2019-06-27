@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SistemaAcad.Models;
+using PagedList;
 
 namespace SistemaAcad.Controllers
 {
@@ -38,6 +39,10 @@ namespace SistemaAcad.Controllers
             {
                 searchString = currentFilter;
             }
+
+            ViewBag.CurrentFilter = searchString;
+            ViewBag.CurrentSort = sortOrder;
+
             ViewData["CurrentFilter"] = searchString;
             ViewData["CurrentSort"] = sortOrder;
 
@@ -99,7 +104,9 @@ namespace SistemaAcad.Controllers
 
             return View(await categorias.AsNoTracking().ToListAsync());
             int pageSize = 3;
-            return View(await Paginacion<Categoria>.CreateAsync(categorias.AsNoTracking(), page ?? 1, pageSize));
+            int pageNumber = (page ?? 1);
+            // return View(await Paginacion<Categoria>.CreateAsync(categorias.AsNoTracking(), page ?? 1, pageSize));
+            return View(categorias.ToPagedList(pageNumber, pageSize));
         }
     
 
