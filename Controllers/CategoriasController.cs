@@ -30,14 +30,14 @@ namespace SistemaAcad.Controllers
             ViewData["searchString"] = searchString;
 
 
-            
+            var categorias = from s in _context.Categoria select s;
 
-            /* if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString))
               {
                   categorias = categorias.Where(s => s.Nombre.Contains(searchString) || s.Descripcion.Contains(searchString));
-              }*/
+              }
 
-           /* if (searchString != null)
+            if (searchString != null)
             {
                 page = 1;
             }
@@ -46,12 +46,12 @@ namespace SistemaAcad.Controllers
                 searchString = currentFilter;
             }
             ViewData["CurrentFilter"] = searchString;
-            ViewData["CurrentSort"] = sortOrder;*/
+            ViewData["CurrentSort"] = sortOrder;
 
 
 
 
-            var categorias = from s in _context.Categoria select s;
+           
 
             switch (sortOrder)
             {
